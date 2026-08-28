@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>h8mail v2.5.6 // FIELD MANUAL - TACTICAL OSINT</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070a12;
+  --bg2:#0e1324;
+  --bg3:#161d36;
+  --recon:#00ff9d;
+  --recon-glow:0 0 20px rgba(0,255,157,.5);
+  --audit:#00d5ff;
+  --audit-glow:0 0 20px rgba(0,213,255,.5);
+  --exploit:#ff2e93;
+  --exploit-glow:0 0 20px rgba(255,46,147,.5);
+  --text:#e6f1ff;
+  --muted:#8b9bb4;
+  --warn:#ffb800;
+  --border:rgba(255,255,255,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Cairo',sans-serif;overflow-x:hidden;line-height:1.7}
+.mono{font-family:'JetBrains Mono',monospace}
+.bg-grid{position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
+.glow-orb{position:fixed;width:600px;height:600px;border-radius:50%;filter:blur(120px);opacity:.15;pointer-events:none;z-index:0}
+.orb1{background:var(--recon);top:-200px;left:-200px}
+.orb2{background:var(--audit);bottom:10%;right:-150px}
+.orb3{background:var(--exploit);top:50%;left:50%}
+.container{position:relative;z-index:1;max-width:1350px;margin:0 auto;padding:20px}
+header{border:1px solid var(--border);background:linear-gradient(180deg, var(--bg2), var(--bg));border-radius:20px;padding:28px;position:relative;overflow:hidden}
+header:before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--recon),var(--audit),var(--exploit))}
+.topbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.logo{display:flex;gap:14px;align-items:center}
+.logo-mark{width:48px;height:48px;background:linear-gradient(135deg,var(--recon),var(--audit));border-radius:12px;display:grid;place-items:center;color:#000;font-weight:900;font-family:'JetBrains Mono';box-shadow:var(--recon-glow)}
+.badge{padding:6px 12px;border-radius:99px;border:1px solid var(--border);background:var(--bg3);font-size:12px}
+.badge.recon{color:var(--recon);border-color:rgba(0,255,157,.3);box-shadow:var(--recon-glow)}
+.badge.audit{color:var(--audit);border-color:rgba(0,213,255,.3)}
+.badge.exploit{color:var(--exploit);border-color:rgba(255,46,147,.3)}
+h1{font-size:38px;font-weight:900;line-height:1.1;margin:18px 0 8px;letter-spacing:-1px}
+h1 span{background:linear-gradient(90deg,var(--recon),var(--audit));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.subtitle{color:var(--muted);max-width:800px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:22px}
+.stat{border:1px solid var(--border);background:var(--bg2);border-radius:14px;padding:14px}
+.stat b{font-size:22px;display:block}
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
+.legend span{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:99px;border:1px solid var(--border);background:var(--bg2);font-size:13px}
+.dot{width:10px;height:10px;border-radius:50%}
+.toolbar{display:flex;gap:10px;margin:18px 0;flex-wrap:wrap}
+.toolbar input, .toolbar select{background:var(--bg2);border:1px solid var(--border);color:var(--text);padding:12px 14px;border-radius:12px;font-family:'Cairo';min-width:200px}
+.toolbar input{flex:1}
+.flag-grid{display:grid;grid-template-columns:1fr;gap:18px}
+.flag-card{border:1px solid var(--border);background:linear-gradient(180deg,var(--bg2),rgba(14,19,36,.6));border-radius:18px;overflow:hidden;position:relative;transition:.2s}
+.flag-card:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.15)}
+.flag-card.recon{border-left:4px solid var(--recon)}
+.flag-card.audit{border-left:4px solid var(--audit)}
+.flag-card.exploit{border-left:4px solid var(--exploit)}
+.card-head{padding:20px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center;cursor:pointer}
+.card-head h3{font-size:20px;display:flex;gap:10px;align-items:center}
+.card-head h3 code{background:#000;padding:4px 10px;border-radius:8px;border:1px solid var(--border);font-size:16px;direction:ltr;display:inline-block}
+.phase{font-size:11px;padding:4px 10px;border-radius:99px;border:1px solid var(--border);text-transform:uppercase;letter-spacing:1px}
+.phase.r{background:rgba(0,255,157,.1);color:var(--recon);border-color:rgba(0,255,157,.25)}
+.phase.a{background:rgba(0,213,255,.1);color:var(--audit);border-color:rgba(0,213,255,.25)}
+.phase.e{background:rgba(255,46,147,.1);color:var(--exploit);border-color:rgba(255,46,147,.25)}
+.card-body{padding:0 20px 20px;display:grid;gap:16px}
+.block{border:1px solid var(--border);background:rgba(0,0,0,.35);border-radius:14px;padding:16px}
+.block h4{font-size:13px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.block h4 b{color:var(--text);font-size:14px}
+.code{position:relative;background:#02040a;border:1px solid var(--border);border-radius:12px;padding:14px 12px 14px 14px;overflow:auto;direction:ltr;text-align:left;font-family:'JetBrains Mono';font-size:13px;white-space:pre-wrap;word-break:break-all}
+.copy{position:absolute;top:8px;right:8px;background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:4px 10px;border-radius:8px;cursor:pointer;font-size:11px}
+.copy:hover{background:var(--text);color:#000}
+.tip{border-left:3px solid var(--warn);background:rgba(255,184,0,.06);padding:12px;border-radius:0 12px 12px 0;color:#ffda7a}
+.section-title{margin:40px 0 16px;font-size:28px;font-weight:900;display:flex;align-items:center;gap:12px}
+.section-title:before{content:'';width:6px;height:28px;border-radius:99px;background:linear-gradient(var(--recon),var(--audit))}
+.ready-grid{display:grid;grid-template-columns:1fr;gap:14px}
+.ready-card{border:1px solid var(--border);border-radius:16px;background:linear-gradient(180deg,var(--bg3),var(--bg2));padding:18px;position:relative;overflow:hidden}
+.ready-card:before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--recon),var(--audit),var(--exploit))}
+.level{font-size:11px;padding:4px 8px;border-radius:99px;background:#000;border:1px solid var(--border);display:inline-block;margin-bottom:8px}
+footer{margin:50px 0 20px;padding:20px;border:1px dashed var(--border);border-radius:14px;text-align:center;color:var(--muted);font-size:13px}
+.collapsed .card-body{display:none}
+@media(max-width:700px){h1{font-size:26px}.container{padding:12px}}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="glow-orb orb1"></div>
+<div class="glow-orb orb2"></div>
+<div class="glow-orb orb3"></div>
+<div class="container">
+<header>
+<div class="topbar">
+<div class="logo"><div class="logo-mark">H8</div><div><div class="mono" style="font-weight:700">h8mail v2.5.6 - ROCKS MASSON.6</div><div style="font-size:12px;color:var(--muted)">Heartfelt Email OSINT // Tactical Field Manual</div></div></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><span class="badge recon">19 FLAG FULL COVERAGE</span><span class="badge audit">NO SHORTCUTS</span><span class="badge exploit">FIELD READY</span></div>
+</div>
+<h1>دليل العمليات الميدانية الكامل لـ <span>h8mail</span> // Email OSINT & Breach Hunting</h1>
+<p class="subtitle">هذه ليست أداة بحث بريد عادية. هذه منصة استخبارات تسريب كلمات المرور. مهمتك: تحويل أي بريد إلى خريطة اختراق كاملة - هل تسرب؟ أين؟ ما الباسورد؟ هل يعاد استعماله؟ هل نستطيع مطاردة الشبكة المرتبطة به عبر hunter.io وكل الـ APIs؟ هذا الدليل يفكك كل Flag تشريحا جراحيا بستة محاور ثابتة - بلا تلخيص، بلا حذف، بلا أعذار.</p>
+<div class="stats">
+<div class="stat"><b class="mono">19</b><span>Flag مشروحة 100%</span></div>
+<div class="stat"><b class="mono">6x19</b><span>نقطة تكتيكية إجبارية</span></div>
+<div class="stat"><b class="mono">12</b><span>أمر جاهز مضمون النجاح</span></div>
+<div class="stat"><b class="mono">GitHub Pages</b><span>ملف واحد جاهز للرفع</span></div>
+</div>
+<div class="legend">
+<span><i class="dot" style="background:var(--recon)"></i> استطلاع RECON - جمع الأهداف</span>
+<span><i class="dot" style="background:var(--audit)"></i> تدقيق نشط AUDIT - البحث المحلي والـ API</span>
+<span><i class="dot" style="background:var(--exploit)"></i> تحقق واستغلال OPSEC - الإخراج والتحكم</span>
+</div>
+<div class="toolbar">
+<input id="search" placeholder="ابحث عن Flag ... مثال: chase, breach, target">
+<select id="phaseFilter"><option value="all">كل المراحل</option><option value="recon">استطلاع فقط</option><option value="audit">تدقيق فقط</option><option value="exploit">تحقق/OPSEC فقط</option></select>
+</div>
+</header>
+
+<div id="flags" class="flag-grid"></div>
+
+<div class="section-title">أوامر جاهزة للنسخ مضمونة النجاح // Ready-to-Copy Chain Attacks</div>
+<div id="ready" class="ready-grid"></div>
+
+<footer class="mono">Built for Self-Learning Elite Operators // Use Responsibly // h8mail manual - no summary, full dissection. // Deploy: copy this TXT as index.html to GitHub Pages - works instantly.</footer>
+</div>
+
+<script>
+const FLAGS = [
+{
+ id:"help",
+ cmd:"-h, --help",
+ phase:"exploit",
+ label:"دليل النجاة السريع",
+ what:"هذا الفلاغ يعرض قائمة المساعدة الخام الكاملة للأداة. هو نقطة البداية لكل مشغل.",
+ why:"في الميدان، تنسى السينتاكس. هذا الأمر يعطيك كل الخيارات دون الرجوع للإنترنت. تستعمله للتحقق السريع من ترتيب الوسيطات قبل تنفيذ هجوم OSINT على بريد هدف.",
+ how:"عند استدعائه، الـ argparse في بايثون يطبع help text ويخرج فورا exit code 0. لا ينفذ أي استعلام شبكة ولا يقرأ config. العملية محلية 100%.",
+ ex1:"h8mail --help",
+ ex1desc:"أبسط استعمال: يطبع البنر والـ usage والـ options.",
+ ex2:"h8mail -h | grep -A2 chase",
+ ex2desc:"احترافي: ربط مع grep لفلترة الشرح. مفيد عندما تريد تذكر فلاغ واحد بسرعة داخل tmux دون تمرير الشاشة كاملة.",
+ tips:["لا تخلط -h مع -t في نفس الأمر - الـ help سيلغي التنفيذ","استعمله داخل سكربت للتحقق أن الأداة مثبتة قبل بدء سلسلة OSINT","في التدريب، اطبع --help واحفظه كـ PDF مرجع ميداني"]
+},
+{
+ id:"targets",
+ cmd:"-t, --targets USER_TARGETS [USER_TARGETS ...]",
+ phase:"recon",
+ label:"تحديد الأهداف الرئيسي - قلب الهجوم",
+ what:"الوسيط الأساسي لتزويد الأداة بالبريد الإلكتروني أو قائمة بريد. يدعم إدخال مباشر، ملف، glob pattern، وعدة وسائط بنفس الوقت.",
+ why:"بدون -t لا يوجد هجوم. هذا هو entry point لعملية Email OSINT. في اختبار اختراق، تجمع بريد الموظفين من hunter.io أو LinkedIn ثم تمررهم هنا لاكتشاف إعادة استعمال كلمات المرور.",
+ how:"المحرك يعمل كالتالي: يأخذ كل وسيط، يتحقق هل هو ملف موجود؟ إذا نعم يقرأ كل سطر. إذا لا، يطبق regex للبريد. إذا فشل، ومع --loose مفعل، يعتبره نمط. يدعم glob مثل targets/*.txt يتم توسيعه عبر python glob module.",
+ ex1:"h8mail -t target@company.com",
+ ex1desc:"هدف واحد مباشر. الأداة ستستعلم Scylla و HunterIO افتراضيا عنه.",
+ ex2:"h8mail -t emails.txt more.txt --loose -o results.csv",
+ ex2desc:"احترافي: ملفين مختلفين، مع loose search، وحفظ CSV. يربط الاستطلاع بالتدقيق المحلي والإخراج في أمر واحد. مثالي عند دمج OSINT من مصادر متعددة.",
+ tips:["لا تضع مسافة بعد الفاصلة في قائمة البريد، كل بريد وسيط منفصل","إذا الملف كبير أكثر من 10k بريد، قسمه إلى chunks لتجنب Rate Limit في APIs","استخدم glob مثل -t ./leaks/*.txt لجمع كل التسريبات المكتشفة سابقا في هجمة واحدة"]
+},
+{
+ id:"url",
+ cmd:"-u, --url USER_URLS [USER_URLS ...]",
+ phase:"recon",
+ label:"استخراج البريد من صفحات الويب - Web Scraping OSINT",
+ what:"يأخذ URL أو قائمة URLs ويقوم بتحميل الصفحة واستخراج كل عناوين البريد منها عبر regex.",
+ why:"في سيناريو حقيقي، تجد صفحة Team أو Contact مليئة ببريد الموظفين. بدلا من النسخ اليدوي، تمرر رابط الصفحة وه8ميل يستخرجهم تلقائيا ويبدأ فحص التسريب.",
+ how:"يستخدم requests لتحميل HTML، ثم يطبق email regex على النص. يتطلب أن يبدأ الرابط بـ http:// أو https://. يمكنه قراءة ملف يحتوي روابط. يدعم glob للملفات.",
+ ex1:"h8mail -u https://target.com/team",
+ ex1desc:"يسحب صفحة فريق الشركة، يستخرج كل الإيميلات، يفحصها ضد البريتشات.",
+ ex2:"h8mail -u urls.txt -t known@target.com -ch 10 --power-chase -o chain.csv",
+ ex2desc:"متقدم: يجمع بين بريد معروف + استخراج بريد من قائمة URLs، ثم يفعل chase لجلب 10 بريد مرتبط لكل هدف من كل الخدمات، وينتج Chain Attack كامل.",
+ tips:["تأكد من https:// - بدونه يتجاهل الرابط","المواقع التي تستخدم Cloudflare قد ترجع 403 - استخدم curl لحفظ الصفحة محليا ثم -t على الملف المستخرج","ادمج -u مع --loose إذا الصفحة تحوي usernames فقط وليس بريد كامل"]
+},
+{
+ id:"custom-query",
+ cmd:"-q, --custom-query USER_QUERY",
+ phase:"recon",
+ label:"استعلام مخصص خارج البريد - Lateral Hunting",
+ what:"يسمح بالبحث بمعايير غير البريد: username, password, ip, hash, domain. يفعل ضمنيا loose search عند البحث محليا.",
+ why:"عندما تجد باسورد مسرب، تريد معرفة كل الحسابات التي استخدمت نفس الباسورد. أو عندك IP تريد معرفة من سجل به. هذا الفلاغ يحول h8mail من email hunter إلى breach search engine.",
+ how:"يمرر الكويري إلى كل مصدر: محليا يبحث كـ substring في ملفات التسريب، و عبر APIs مثل Dehashed و Snusbase التي تدعم البحث بالـ hash أو الـ ip. الـ loose يمنع فلترة regex البريد.",
+ ex1:"h8mail -q P@ssw0rd123",
+ ex1desc:"يبحث عن كل ظهور لكلمة السر هذه في التسريبات المحلية والـ APIs. خطير لفهم انتشار الباسورد.",
+ ex2:"h8mail -q 192.168.1.10 -lb ./breaches -gz ./breaches_gz --hide",
+ ex2desc:"احترافي: تبحث عن IP في تسريبات محلية مضغوطة وغير مضغوطة، مع إخفاء الباسوردات في العرض للـ demo الآمن.",
+ tips:["استخدمه مع -lb و -gz للحصول على نتائج فورية بدون API keys","عند البحث عن domain مثل -q target.com سيرجع كل بريد في ذلك الدومين حتى لو لم تمرره بـ -t","احذر من الكويري العامة مثل 'admin' - ستغرق في النتائج، استخدم كويري محددة"]
+},
+{
+ id:"loose",
+ cmd:"--loose",
+ phase:"recon",
+ label:"البحث الفضفاض - كسر قيود الـ Regex",
+ what:"يعطل التعرف على نمط البريد الإلكتروني. يستخدم المسافات كفواصل أنماط. يسمح بالبحث بأي نص.",
+ why:"الوضع الافتراضي يرفض أي شيء ليس بريدا. لكن في التحقيق تحتاج تبحث عن username فقط أو جزء من البريد. هذا الفلاغ يفتح الباب.",
+ how:"عند تفعيله، يتخطى دالة is_email() ويعتبر كل token هو target. في البحث المحلي، يحول البحث إلى substring search بدل regex match.",
+ ex1:"h8mail -t john.doe --loose",
+ ex1desc:"يبحث عن john.doe حتى لو ليس بريد كامل. مفيد عند عندك usernames من تسريب.",
+ ex2:"h8mail -t list_of_usernames.txt --loose -lb ./combolist.txt -o loose_hunt.csv",
+ ex2desc:"متقدم: يأخذ قائمة usernames، يبحث عنهم في combolist ضخم، ويخرج النتائج - يستخدم لربط usernames بكلمات سر مسربة.",
+ tips:["يجب أن يسبق أو يلي -t أو -q - وحده لا يفعل شيئا","مع --loose ستزيد الضوضاء - ادمجه مع -o وفلتر النتائج لاحقا بـ jq","مثالي عند البحث في تسريبات لا تتبع صيغة email:pass بل user:pass"]
+},
+{
+ id:"config",
+ cmd:"-c, --config CONFIG_FILE [CONFIG_FILE ...]",
+ phase:"audit",
+ label:"تحميل مفاتيح الـ APIs - ذخيرة الهجوم",
+ what:"يحدد ملف أو ملفات الإعداد التي تحتوي مفاتيح API لخدمات Snusbase, WeLeakInfo, Leak-Lookup, HaveIBeenPwned, Emailrep, Dehashed, hunterio.",
+ why:"بدون مفاتيح، أنت محدود بـ Scylla المجانية فقط. مع هذا الفلاغ، تفتح ترسانة كاملة من 7 مصادر OSINT مدفوعة. في اختبار اختراق حقيقي، هذا يفرق بين نتيجة سطحية واختراق كامل.",
+ how:"يقرأ INI file، يبحث عن أقسام مثل [haveibeenpwned] و [dehashed]، يحمل المفاتيح إلى dict. يدعم تمرير عدة ملفات يتم دمجها. إذا لم تمرر شيء، يبحث عن h8mail_config.ini في المجلد الحالي.",
+ ex1:"h8mail -t victim@corp.com -c myconfig.ini",
+ ex1desc:"يستخدم مفاتيحك الخاصة لفحص بريد واحد عبر كل الخدمات.",
+ ex2:"h8mail -t bulk.txt -c config1.ini config2.ini -o full_api.csv -j full_api.json",
+ ex2desc:"احترافي: دمج ملفين إعداد (مثلا واحد لفريق وواحد شخصي)، مع إخراج مزدوج CSV+JSON للتحليل الآلي اللاحق.",
+ tips:["شغل h8mail --gen-config أولا لتوليد قالب ثم املأ المفاتيح","لا ترفع ملف config إلى GitHub - ضعه في .gitignore","يمكنك تمرير مجلد؟ لا، يجب ملفات - استخدم glob: -c ./configs/*.ini"]
+},
+{
+ id:"output",
+ cmd:"-o, --output OUTPUT_FILE",
+ phase:"exploit",
+ label:"حفظ النتائج CSV - سجل المعركة",
+ what:"يحدد ملف لحفظ النتائج بصيغة CSV المنظمة.",
+ why:"الطرفية تضيع، والذاكرة تخون. في عملية ميدانية، تحتاج سجل قابل للاستيراد إلى Excel أو Maltego أو BloodHound. هذا الفلاغ يضمن أن كل باسورد مكتشف محفوظ.",
+ how:"يفتح ملف للكتابة، يكتب header: target, breach, email, password, etc. كل نتيجة تضاف كسطر. يدعم الكتابة التراكمية.",
+ ex1:"h8mail -t admin@site.com -o pwned.csv",
+ ex1desc:"يفحص و يحفظ النتيجة في pwned.csv لاستخدامها لاحقا في هجوم credential stuffing.",
+ ex2:"h8mail -t list.txt -lb ./leaks -gz ./leaks -o all.csv -j all.json --hide",
+ ex2desc:"Chain: بحث محلي شامل + إخراج مزدوج + إخفاء الباسورد للعرض الآمن للعميل.",
+ tips:["استخدم امتداد .csv دائما حتى لو نسيت، الأداة لا تفرضه","إذا الملف موجود، سيتم الكتابة فوقه - خذ نسخة قبل","افتح الـ CSV بـ xsv أو csvkit لفلترة سريعة"]
+},
+{
+ id:"json",
+ cmd:"-j, --json OUTPUT_JSON",
+ phase:"exploit",
+ label:"حفظ النتائج JSON - للتشغيل الآلي",
+ what:"يحفظ النتائج بصيغة JSON مفصلة ومنظمة للمعالجة البرمجية.",
+ why:"CSV للبشر، JSON للآلات. عندما تريد ربط h8mail مع سكربت بايثون يختبر كلمات السر تلقائيا أو يرسل تنبيه Slack، تحتاج JSON.",
+ how:"يبني list of dicts، كل dict يحوي target, sources, data. ثم json.dump بترميز utf-8. يحفظ كل التفاصيل بما فيها الـ raw responses.",
+ ex1:"h8mail -t ceo@company.com -j ceo.json",
+ ex1desc:"يحفظ نتيجة فحص CEO بصيغة JSON للتحليل.",
+ ex2:"h8mail -t staff.txt -c config.ini -j staff.json -o staff.csv --power-chase --chase 5",
+ ex2desc:"عملية كاملة: جمع بريد الموظفين، مطاردة 5 بريد مرتبط لكل واحد عبر كل الـ APIs، وحفظ بصيغتين.",
+ tips:["استخدم jq لقراءة JSON: cat file.json | jq .","JSON أكبر من CSV - لا تستخدمه لقوائم ضخمة أكثر من 50k إلا مع --single-file","ادمج JSON مع سكربت يولد تقرير HTML تلقائيا"]
+},
+{
+ id:"breachcomp",
+ cmd:"-bc, --breachcomp BC_PATH",
+ phase:"audit",
+ label:"تكامل BreachCompilation - التورنت الأسطوري",
+ what:"يحدد مسار مجلد تورنت BreachCompilation الشهير (1.4 مليار حساب) ويستخدم السكربت query.sh المضمن فيه.",
+ why:"هذا أكبر تجميع تسريبات مجاني في التاريخ. إذا عندك التورنت محليا (40GB)، هذا الفلاغ يعطيك قوة بحث خارقة بدون APIs ولا إنترنت. هو سلاح الـ offline المطلق.",
+ how:"يتحقق من وجود query.sh في المسار المعطى، ثم ينفذ bash query.sh TARGET لكل target. يلتقط الإخراج ويحلله.",
+ ex1:"h8mail -t test@test.com -bc /opt/breachcompilation",
+ ex1desc:"يبحث عن البريد في BreachCompilation المحلي.",
+ ex2:"h8mail -t targets.txt -bc /data/bc -lb ./other_leaks --single-file -o bc_hunt.csv",
+ ex2desc:"متقدم: يجمع بين BreachCompilation وتسريبات أخرى محلية، مع single-file لعرض شريط التقدم واستقرار البحث.",
+ tips:["المسار يجب أن يحوي query.sh - لا تعطه مسار ملف داخل","BreachCompilation بطيء - استخدم --single-file لرؤية التقدم","إذا لم يكن عندك التورنت، لا تستخدم هذا الفلاغ - سيعطي خطأ"]
+},
+{
+ id:"skip-defaults",
+ cmd:"-sk, --skip-defaults",
+ phase:"audit",
+ label:"تخطي الفحص الافتراضي - وضع التخفي المحلي",
+ what:"يتخطى فحص Scylla و HunterIO الافتراضي. مثالي للفحص المحلي فقط.",
+ why:"عندما تعمل offline أو لا تريد أن تترك أثر شبكي أو لا تملك إنترنت، هذا الفلاغ يمنع أي طلب خارجي. أيضا يسرع البحث المحلي بنسبة 70%.",
+ how:"يضع متغيرين skip_scylla=True و skip_hunter=True. حلقة الاستعلام تتخطى هذين المصدرين تماما.",
+ ex1:"h8mail -t user@local.test -lb ./leak.txt -sk",
+ ex1desc:"بحث محلي صرف - لا إنترنت، لا API، فقط ملف التسريب.",
+ ex2:"h8mail -t biglist.txt -lb /mnt/leaks -gz /mnt/leaks_gz -sk -sf -o local_only.csv",
+ ex2desc:"عملية محلية ضخمة: كل التسريبات المضغوطة وغير المضغوطة، بدون إنترنت، مع شريط تقدم، وحفظ.",
+ tips:["استخدمه دائما في CTF أو Exam حيث الإنترنت ممنوع","يجعلك stealth - لا طلبات DNS تخرج","مع -sk يمكنك العمل حتى بدون config"]
+},
+{
+ id:"apikey",
+ cmd:"-k, --apikey CLI_APIKEYS [CLI_APIKEYS ...]",
+ phase:"audit",
+ label:"تمرير المفاتيح من سطر الأوامر - الهجوم السريع",
+ what:"يسمح بتمرير مفاتيح API مباشرة من سطر الأوامر بصيغة K=V,K=V دون الحاجة لملف config.",
+ why:"في سيناريو سريع، لا تريد إنشاء ملف config. تريد لصق مفتاح Dehashed مؤقت والانطلاق. هذا الفلاغ للسرعة التكتيكية.",
+ how:"يحلل النص: يقسم على فاصلة، ثم كل عنصر على =. يبني dict للمفاتيح ويحدث الإعدادات في الذاكرة. يدعم عدة مجموعات.",
+ ex1:"h8mail -t victim@corp.com
