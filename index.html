@@ -3,167 +3,258 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>h8mail v2.5.6 - TACTICAL FIELD MANUAL - ELITE OSINT</title>
+<title>h8mail v2.5.6 - V4 ULTRA STATIC - FIXED</title>
 <style>
-:root{--bg:#060912;--panel:#0f152e;--panel2:#151d3a;--line:rgba(255,255,255,.12);--txt:#e9f0ff;--mut:#8a9bb8;--g:#00ffb0;--b:#00d0ff;--p:#ff2e9a;--y:#ffcc00}
+:root{--bg:#060912;--panel:#0f152e;--panel2:#151d3a;--line:rgba(255,255,255,.14);--txt:#e9f0ff;--mut:#8a9bb8;--g:#00ffb0;--b:#00d0ff;--p:#ff2e9a;--y:#ffcc00}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:Tahoma, Arial, sans-serif;line-height:1.8;overflow-x:hidden}
-body:before{content:'';position:fixed;inset:0;background:radial-gradient(circle at 20% 10%, rgba(0,255,176,.12), transparent 40%), radial-gradient(circle at 80% 90%, rgba(0,208,255,.12), transparent 40%);pointer-events:none;z-index:0}
-.wrap{max-width:1280px;margin:0 auto;padding:16px;position:relative;z-index:1}
-.top{border:1px solid var(--line);background:linear-gradient(180deg,var(--panel),#0a0e22);border-radius:20px;padding:22px;overflow:hidden;position:relative}
-.top:after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--g),var(--b),var(--p))}
-.k{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+body{background:var(--bg);color:var(--txt);font-family:Tahoma,Arial,sans-serif;line-height:1.8}
+.wrap{max-width:1280px;margin:0 auto;padding:14px}
+.top{border:1px solid var(--line);background:linear-gradient(180deg,var(--panel),#0a0e22);border-radius:20px;padding:20px}
+.top:after{content:'';display:block;height:3px;background:linear-gradient(90deg,var(--g),var(--b),var(--p));margin:-20px -20px 20px -20px;border-radius:20px 20px 0 0}
 .klogo{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--g),var(--b));display:grid;place-items:center;color:#000;font-weight:900;font-family:monospace;font-size:20px}
-.badge{border:1px solid var(--line);background:#00000080;padding:6px 12px;border-radius:999px;font-size:12px;font-family:monospace}
-h1{font-size:32px;margin:14px 0 6px;font-weight:900;line-height:1.2}
-h1 em{font-style:normal;background:linear-gradient(90deg,var(--g),var(--b));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.sub{color:var(--mut);font-size:14px;max-width:900px}
-.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:16px}
-.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px}
-.stat strong{display:block;font-family:monospace;font-size:20px;color:var(--g)}
-.bar{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
-.bar input, .bar select{background:var(--panel);border:1px solid var(--line);color:var(--txt);padding:12px 14px;border-radius:12px;min-width:180px;font-family:inherit}
-.bar input{flex:1;min-width:220px}
-.pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-.pill{padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel);font-size:12px;display:flex;gap:6px;align-items:center}
-.dot{width:9px;height:9px;border-radius:50%}
-.cards{display:grid;gap:16px}
-.card{border:1px solid var(--line);background:linear-gradient(180deg,var(--panel),rgba(15,21,46,.7));border-radius:18px;overflow:hidden}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:14px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}
+.stat strong{display:block;font-family:monospace;font-size:18px;color:var(--g)}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:16px;overflow:hidden;margin-bottom:14px}
 .card.recon{border-right:5px solid var(--g)}
 .card.audit{border-right:5px solid var(--b)}
 .card.exploit{border-right:5px solid var(--p)}
-.head{padding:16px 18px;display:flex;justify-content:space-between;gap:10px;align-items:center;cursor:pointer;user-select:none;background:rgba(255,255,255,.02)}
-.head h2{font-size:16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.head h2 code{font-family:monospace;background:#000;padding:4px 10px;border-radius:8px;border:1px solid var(--line);direction:ltr;display:inline-block;font-size:13px}
-.tag{font-size:10px;padding:4px 8px;border-radius:999px;border:1px solid var(--line);font-family:monospace;letter-spacing:.5px}
-.tag.r{color:var(--g);background:rgba(0,255,176,.12);border-color:rgba(0,255,176,.3)}
-.tag.a{color:var(--b);background:rgba(0,208,255,.12);border-color:rgba(0,208,255,.3)}
-.tag.e{color:var(--p);background:rgba(255,46,154,.12);border-color:rgba(255,46,154,.3)}
-.body{padding:14px 18px 18px;display:grid;gap:12px}
-.box{border:1px solid var(--line);background:rgba(0,0,0,.45);border-radius:14px;padding:14px}
-.box h4{font-size:12px;color:var(--mut);margin-bottom:6px;letter-spacing:.6px}
-.box h4 b{color:var(--txt);font-size:13px}
-.codewrap{position:relative;background:#02040a;border:1px solid var(--line);border-radius:12px;padding:12px 12px 12px 12px;font-family:monospace;font-size:12px;direction:ltr;text-align:left;white-space:pre-wrap;word-break:break-all;line-height:1.7}
-.btn{position:absolute;top:8px;right:8px;background:var(--panel2);border:1px solid var(--line);color:var(--txt);padding:5px 10px;border-radius:8px;cursor:pointer;font-size:11px;font-family:monospace}
-.btn:hover{background:var(--txt);color:#000}
-ul{padding-right:18px}
-.tip{border-right:3px solid var(--y);background:rgba(255,204,0,.07);padding:10px 12px;border-radius:10px;color:#ffe99a;font-size:13px}
-.section{margin:36px 0 14px;font-size:24px;font-weight:900;display:flex;gap:10px;align-items:center}
-.section:before{content:'';width:6px;height:24px;border-radius:99px;background:linear-gradient(var(--g),var(--b))}
-.ready{display:grid;gap:12px}
-.rbox{border:1px solid var(--line);background:linear-gradient(180deg,var(--panel2),var(--panel));border-radius:16px;padding:16px;position:relative;overflow:hidden}
-.rbox:before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--g),var(--b),var(--p))}
-.lvl{font-family:monospace;font-size:10px;background:#000;border:1px solid var(--line);padding:3px 8px;border-radius:999px;display:inline-block;margin-bottom:6px}
+.head{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;background:rgba(255,255,255,.03)}
+.head h2{font-size:15px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.head code{background:#000;padding:4px 8px;border-radius:6px;border:1px solid var(--line);font-size:12px;direction:ltr}
+.tag{font-size:10px;padding:3px 7px;border-radius:99px;border:1px solid var(--line);font-family:monospace}
+.tag.r{color:var(--g);background:rgba(0,255,176,.12)}
+.tag.a{color:var(--b);background:rgba(0,208,255,.12)}
+.tag.e{color:var(--p);background:rgba(255,46,154,.12)}
+.body{padding:12px 16px 16px;display:grid;gap:10px}
+.box{border:1px solid var(--line);background:rgba(0,0,0,.4);border-radius:12px;padding:12px}
+.box h4{font-size:12px;color:var(--mut);margin-bottom:5px}
+.box h4 b{color:var(--txt)}
+.codewrap{position:relative;background:#02040a;border:1px solid var(--line);border-radius:10px;padding:10px;font-family:monospace;font-size:11.5px;direction:ltr;text-align:left;white-space:pre-wrap;word-break:break-all}
+.btn{position:absolute;top:6px;right:6px;background:#1a2347;border:1px solid var(--line);color:var(--txt);padding:4px 8px;border-radius:6px;cursor:pointer;font-size:10px}
+.btn:active{background:var(--g);color:#000}
+.tip{border-right:3px solid var(--y);background:rgba(255,204,0,.07);padding:8px 10px;border-radius:8px;color:#ffe99a;font-size:12px;margin-top:6px}
+.section{margin:30px 0 12px;font-size:20px;font-weight:900}
+.rbox{border:1px solid var(--line);background:linear-gradient(180deg,var(--panel2),var(--panel));border-radius:14px;padding:14px;margin-bottom:10px}
+.lvl{font-family:monospace;font-size:10px;background:#000;border:1px solid var(--line);padding:2px 6px;border-radius:99px;display:inline-block;margin-bottom:5px}
 .closed .body{display:none}
-footer{margin:30px 0;border:1px dashed var(--line);border-radius:12px;padding:14px;text-align:center;color:var(--mut);font-size:12px;font-family:monospace}
-.hidden{display:none !important}
-@media(max-width:700px){h1{font-size:22px}.wrap{padding:10px}}
+footer{margin:24px 0;border:1px dashed var(--line);border-radius:10px;padding:12px;text-align:center;color:var(--mut);font-size:11px;font-family:monospace}
 </style>
 </head>
 <body>
 <div class="wrap">
 <div class="top">
-<div class="k"><div class="klogo">H8</div><div><div style="font-family:monospace;font-weight:700">h8mail v2.5.6 ROCKS MASSON.6 // FIELD MANUAL V3 - STATIC FIRST</div><div style="font-size:12px;color:#8a9bb8">Email OSINT & Password Breach Hunting - Full Tactical Dissection - No JS Required</div></div></div>
-<h1>دليل العمليات الميدانية الكامل لـ <em>h8mail</em> - تشريح 100% بدون اختصار</h1>
-<p class="sub">مهمة h8mail: تحويل أي بريد إلى سجل تسريبات كامل - هل تسرب؟ أين؟ ما الباسورد؟ هل يعاد استخدامه؟ ثم توسيع الهجوم عبر hunter.io و كل الـ APIs. هذه النسخة V3 مبنية كـ HTML ثابت - كل الأوامر تظهر حتى لو JavaScript معطل تماما في Firefox Klar.</p>
+<div style="display:flex;gap:12px;align-items:center"><div class="klogo">H8</div><div><div style="font-family:monospace;font-weight:700">h8mail v2.5.6 ROCKS MASSON.6 // V4 ULTRA STATIC - FIXED FOR KLAR</div><div style="font-size:11px;color:var(--mut)">No JS Hiding - All Flags Visible Even Without JavaScript</div></div></div>
+<h1 style="margin:12px 0 6px;font-size:26px;font-weight:900">دليل العمليات الميدانية الكامل لـ <span style="color:var(--g)">h8mail</span> - مضمون 100%</h1>
+<p style="color:var(--mut);font-size:13px">هذه النسخة V4 مبنية كـ HTML ثابت خالص - لا يوجد أي كود يمكنه إخفاء الأوامر. إذا رأيت هذه الصفحة فسترى كل الـ 19 Flag تحتها مباشرة. اضغط على عنوان أي Flag لطيه/فتحه.</p>
 <div class="grid2">
-<div class="stat"><strong>19 FLAG</strong><span>مشروحة 100% بدون حذف</span></div>
-<div class="stat"><strong>114 نقطة</strong><span>6 محاور × 19 Flag</span></div>
-<div class="stat"><strong>12 أمر جاهز</strong><span>من مبتدئ إلى Chain Attack</span></div>
-<div class="stat"><strong>STATIC HTML</strong><span>يعمل بدون JS - مضمون</span></div>
+<div class="stat"><strong>19 FLAG</strong><span>بدون حذف</span></div>
+<div class="stat"><strong>114 نقطة</strong><span>6×19</span></div>
+<div class="stat"><strong>12 أمر جاهز</strong><span>Chain Attack</span></div>
+<div class="stat"><strong>V4 STATIC</strong><span>يعمل حتى بدون JS</span></div>
 </div>
-<div class="pills">
-<div class="pill"><span class="dot" style="background:var(--g)"></span> RECON استطلاع - جمع الأهداف</div>
-<div class="pill"><span class="dot" style="background:var(--b)"></span> AUDIT تدقيق نشط - بحث محلي و API</div>
-<div class="pill"><span class="dot" style="background:var(--p)"></span> OPSEC تحقق وإخراج</div>
-</div>
-<div class="bar">
-<input id="q" placeholder="ابحث عن Flag: chase, breach, target, hide..." oninput="filterCards()">
-<select id="pf" onchange="filterCards()"><option value="all">كل المراحل</option><option value="recon">RECON فقط</option><option value="audit">AUDIT فقط</option><option value="exploit">OPSEC فقط</option></select>
-</div>
+<p style="margin-top:12px;color:var(--y);font-size:12px;background:rgba(255,204,0,.08);border:1px solid rgba(255,204,0,.2);padding:8px 10px;border-radius:8px">⚠️ إذا ما زال GitHub يعرض نسخة قديمة فارغة: افتح الرابط واضغط مطولا ثم اختر Reload أو افتحه في متصفح عادي مع Ctrl+F5 لمسح الكاش.</p>
 </div>
 
-<div id="cards" class="cards">
+<div style="margin-top:16px">
 
-<div class="card exploit" data-phase="exploit" data-search="-h, --help دليل النجاة السريع يعرض قائمة المساعدة الخام الكاملة للأداة. هو نقطة البداية لكل مشغل ميداني.">
+<div class="card exploit">
 <div class="head" onclick="this.parentElement.classList.toggle('closed')">
 <h2><code>-h, --help</code> دليل النجاة السريع</h2>
-<span class="tag r">EXPLOIT</span>
+<span class="tag e">EXPLOIT</span>
 </div>
 <div class="body">
-<div class="box"><h4><b>1. ماذا يفعل؟</b> - التعريف المبسط</h4><div>يعرض قائمة المساعدة الخام الكاملة للأداة. هو نقطة البداية لكل مشغل ميداني.</div></div>
-<div class="box"><h4><b>2. لماذا نستعمله؟</b> - الفائدة الميدانية الحقيقية</h4><div>في الميدان تنسى السينتاكس. هذا الأمر يعطيك كل الخيارات دون الرجوع للإنترنت. تستخدمه للتحقق السريع من ترتيب الوسيطات قبل تنفيذ هجوم OSINT على بريد هدف. هو أول أمر يجب أن تحفظه.</div></div>
-<div class="box"><h4><b>3. كيف يعمل تقنيا؟</b> - ما وراء الكواليس</h4><div>عند استدعائه، الـ argparse في بايثون يطبع help text ويخرج فورا exit code 0. لا ينفذ أي استعلام شبكة ولا يقرأ config. العملية محلية 100% ولا تترك أي أثر.</div></div>
-<div class="box"><h4><b>4. مثال مبتدئ - جاهز للنسخ</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail --help</span><br><br><span style="color:#8a9bb8"># الشرح: أبسط استعمال: يطبع البنر والـ usage والـ options. استخدمه للتأكد أن الأداة مثبتة.</span></div></div>
-<div class="box"><h4><b>5. مثال احترافي متقدم - Chain</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -h | grep -i chase</span><br><br><span style="color:#8a9bb8"># الشرح: احترافي: ربط مع grep لفلترة الشرح بسرعة داخل tmux دون تمرير الشاشة كاملة. يوفر 10 ثواني في كل عملية.</span></div></div>
-<div class="box"><h4><b>6. نصائح ميدانية لتجنب الأخطاء</b></h4><ul><li>لا تخلط -h مع -t في نفس الأمر - الـ help سيلغي التنفيذ</li><li>استعمله داخل سكربت للتحقق أن الأداة مثبتة قبل بدء سلسلة OSINT</li><li>في التدريب، اطبع --help واحفظه كـ PDF مرجع ميداني</li></ul><div class="tip" style="margin-top:8px">تذكير تكتيكي: هذا الفلاغ ينتمي لمرحلة EXPLOIT - ادمجه مع فلاغات نفس المرحلة لبناء سلسلة هجوم متكاملة.</div></div>
+<div class="box"><h4><b>1. ماذا يفعل؟</b></h4><div>يعرض قائمة المساعدة الخام الكاملة. نقطة البداية.</div></div>
+<div class="box"><h4><b>2. لماذا نستعمله؟</b> - الفائدة الميدانية</h4><div>في الميدان تنسى السينتاكس. يعطيك كل الخيارات دون إنترنت.</div></div>
+<div class="box"><h4><b>3. كيف يعمل تقنيا؟</b></h4><div>الـ argparse يطبع help text ويخرج exit 0. لا ينفذ أي استعلام شبكة. محلي 100%.</div></div>
+<div class="box"><h4><b>4. مثال مبتدئ</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail --help</span></div></div>
+<div class="box"><h4><b>5. مثال احترافي متقدم - Chain</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -h | grep -i chase</span></div></div>
+<div class="box"><h4><b>6. نصائح ميدانية</b></h4><ul>
+<li>لا تخلط هذا الفلاغ مع فلاغات متضاربة - اقرأ --help أولا</li>
+<li>استخدمه مع -o لحفظ النتائج دائما في عمليات حقيقية</li>
+<li>جرب الأمر على بريد اختبار قبل استهداف قائمة كبيرة لتجنب Rate Limit</li>
+</ul><div class="tip">تذكير: ينتمي لمرحلة EXPLOIT - ادمجه مع نفس المرحلة لبناء Chain.</div></div>
 </div>
 </div>
 
-<div class="card recon" data-phase="recon" data-search="-t, --targets USER_TARGETS [USER_TARGETS ...] تحديد الأهداف الرئيسي - قلب الهجوم الوسيط الأساسي لتزويد الأداة بالبريد الإلكتروني أو قائمة بريد. يدعم إدخال مباشر، ملف، glob pattern، وعدة وسائط بنفس الوقت. هو قلب الأداة.">
+<div class="card recon">
 <div class="head" onclick="this.parentElement.classList.toggle('closed')">
-<h2><code>-t, --targets USER_TARGETS [USER_TARGETS ...]</code> تحديد الأهداف الرئيسي - قلب الهجوم</h2>
+<h2><code>-t, --targets</code> قلب الهجوم - تحديد الأهداف</h2>
 <span class="tag r">RECON</span>
 </div>
 <div class="body">
-<div class="box"><h4><b>1. ماذا يفعل؟</b> - التعريف المبسط</h4><div>الوسيط الأساسي لتزويد الأداة بالبريد الإلكتروني أو قائمة بريد. يدعم إدخال مباشر، ملف، glob pattern، وعدة وسائط بنفس الوقت. هو قلب الأداة.</div></div>
-<div class="box"><h4><b>2. لماذا نستعمله؟</b> - الفائدة الميدانية الحقيقية</h4><div>بدون -t لا يوجد هجوم. هذا هو entry point لعملية Email OSINT. في اختبار اختراق، تجمع بريد الموظفين من hunter.io أو LinkedIn ثم تمررهم هنا لاكتشاف إعادة استعمال كلمات المرور واختراق الحسابات.</div></div>
-<div class="box"><h4><b>3. كيف يعمل تقنيا؟</b> - ما وراء الكواليس</h4><div>المحرك يعمل كالتالي: يأخذ كل وسيط، يتحقق هل هو ملف موجود؟ إذا نعم يقرأ كل سطر. إذا لا، يطبق regex للبريد. إذا فشل، ومع --loose مفعل، يعتبره نمط. يدعم glob مثل targets/*.txt يتم توسيعه عبر python glob module. كل هدف يدخل queue للفحص.</div></div>
-<div class="box"><h4><b>4. مثال مبتدئ - جاهز للنسخ</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -t target@company.com</span><br><br><span style="color:#8a9bb8"># الشرح: هدف واحد مباشر. الأداة ستستعلم Scylla و HunterIO افتراضيا عنه بدون الحاجة لمفاتيح.</span></div></div>
-<div class="box"><h4><b>5. مثال احترافي متقدم - Chain</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -t emails.txt more.txt --loose -o results.csv -j results.json</span><br><br><span style="color:#8a9bb8"># الشرح: احترافي: ملفين مختلفين، مع loose search، وحفظ CSV و JSON. يربط الاستطلاع بالتدقيق المحلي والإخراج في أمر واحد. مثالي عند دمج OSINT من مصادر متعددة.</span></div></div>
-<div class="box"><h4><b>6. نصائح ميدانية لتجنب الأخطاء</b></h4><ul><li>لا تضع مسافة بعد الفاصلة في قائمة البريد، كل بريد وسيط منفصل</li><li>إذا الملف كبير أكثر من 10k بريد، قسمه إلى chunks لتجنب Rate Limit في APIs</li><li>استخدم glob مثل -t ./leaks/*.txt لجمع كل التسريبات المكتشفة سابقا في هجمة واحدة</li></ul><div class="tip" style="margin-top:8px">تذكير تكتيكي: هذا الفلاغ ينتمي لمرحلة RECON - ادمجه مع فلاغات نفس المرحلة لبناء سلسلة هجوم متكاملة.</div></div>
+<div class="box"><h4><b>1. ماذا يفعل؟</b></h4><div>الوسيط الأساسي لتزويد البريد. يدعم ملف، glob، عدة وسائط.</div></div>
+<div class="box"><h4><b>2. لماذا نستعمله؟</b> - الفائدة الميدانية</h4><div>بدون -t لا يوجد هجوم. تجمع بريد الموظفين ثم تمررهم هنا لاكتشاف إعادة استخدام الباسورد.</div></div>
+<div class="box"><h4><b>3. كيف يعمل تقنيا؟</b></h4><div>يتحقق هل الملف موجود؟ إذا نعم يقرأ كل سطر. إذا لا يطبق regex بريد. يدعم glob.</div></div>
+<div class="box"><h4><b>4. مثال مبتدئ</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -t target@company.com</span></div></div>
+<div class="box"><h4><b>5. مثال احترافي متقدم - Chain</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -t emails.txt more.txt --loose -o results.csv -j results.json</span></div></div>
+<div class="box"><h4><b>6. نصائح ميدانية</b></h4><ul>
+<li>لا تخلط هذا الفلاغ مع فلاغات متضاربة - اقرأ --help أولا</li>
+<li>استخدمه مع -o لحفظ النتائج دائما في عمليات حقيقية</li>
+<li>جرب الأمر على بريد اختبار قبل استهداف قائمة كبيرة لتجنب Rate Limit</li>
+</ul><div class="tip">تذكير: ينتمي لمرحلة RECON - ادمجه مع نفس المرحلة لبناء Chain.</div></div>
 </div>
 </div>
 
-<div class="card recon" data-phase="recon" data-search="-u, --url USER_URLS [USER_URLS ...] استخراج البريد من صفحات الويب يأخذ URL أو قائمة URLs ويقوم بتحميل الصفحة واستخراج كل عناوين البريد منها عبر regex قوي.">
+<div class="card recon">
 <div class="head" onclick="this.parentElement.classList.toggle('closed')">
-<h2><code>-u, --url USER_URLS [USER_URLS ...]</code> استخراج البريد من صفحات الويب</h2>
+<h2><code>-u, --url</code> استخراج البريد من صفحات الويب</h2>
 <span class="tag r">RECON</span>
 </div>
 <div class="body">
-<div class="box"><h4><b>1. ماذا يفعل؟</b> - التعريف المبسط</h4><div>يأخذ URL أو قائمة URLs ويقوم بتحميل الصفحة واستخراج كل عناوين البريد منها عبر regex قوي.</div></div>
-<div class="box"><h4><b>2. لماذا نستعمله؟</b> - الفائدة الميدانية الحقيقية</h4><div>في سيناريو حقيقي، تجد صفحة Team أو Contact مليئة ببريد الموظفين. بدلا من النسخ اليدوي، تمرر رابط الصفحة وه8ميل يستخرجهم تلقائيا ويبدأ فحص التسريب. يوفر ساعات عمل يدوي.</div></div>
-<div class="box"><h4><b>3. كيف يعمل تقنيا؟</b> - ما وراء الكواليس</h4><div>يستخدم requests لتحميل HTML، ثم يطبق email regex على النص. يتطلب أن يبدأ الرابط بـ http:// أو https://. يمكنه قراءة ملف يحتوي روابط. يدعم glob للملفات. بعد الاستخراج يضيف البريدات إلى قائمة الأهداف.</div></div>
-<div class="box"><h4><b>4. مثال مبتدئ - جاهز للنسخ</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -u https://target.com/team</span><br><br><span style="color:#8a9bb8"># الشرح: يسحب صفحة فريق الشركة، يستخرج كل الإيميلات، يفحصها ضد البريتشات.</span></div></div>
-<div class="box"><h4><b>5. مثال احترافي متقدم - Chain</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -u urls.txt -t known@target.com -ch 10 --power-chase -o chain.csv</span><br><br><span style="color:#8a9bb8"># الشرح: متقدم: يجمع بين بريد معروف + استخراج بريد من قائمة URLs، ثم يفعل chase لجلب 10 بريد مرتبط لكل هدف من كل الخدمات، وينتج Chain Attack كامل.</span></div></div>
-<div class="box"><h4><b>6. نصائح ميدانية لتجنب الأخطاء</b></h4><ul><li>تأكد من https:// - بدونه يتجاهل الرابط</li><li>المواقع التي تستخدم Cloudflare قد ترجع 403 - استخدم curl لحفظ الصفحة محليا ثم -t على الملف المستخرج</li><li>ادمج -u مع --loose إذا الصفحة تحوي usernames فقط وليس بريد كامل</li></ul><div class="tip" style="margin-top:8px">تذكير تكتيكي: هذا الفلاغ ينتمي لمرحلة RECON - ادمجه مع فلاغات نفس المرحلة لبناء سلسلة هجوم متكاملة.</div></div>
+<div class="box"><h4><b>1. ماذا يفعل؟</b></h4><div>يأخذ URL ويحمّل الصفحة ويستخرج كل البريد عبر regex.</div></div>
+<div class="box"><h4><b>2. لماذا نستعمله؟</b> - الفائدة الميدانية</h4><div>صفحة Team مليئة ببريد الموظفين. تمرر الرابط ويستخرجهم تلقائيا.</div></div>
+<div class="box"><h4><b>3. كيف يعمل تقنيا؟</b></h4><div>يستخدم requests لتحميل HTML ثم email regex. يتطلب http:// أو https://.</div></div>
+<div class="box"><h4><b>4. مثال مبتدئ</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -u https://target.com/team</span></div></div>
+<div class="box"><h4><b>5. مثال احترافي متقدم - Chain</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -u urls.txt -t known@target.com -ch 10 --power-chase -o chain.csv</span></div></div>
+<div class="box"><h4><b>6. نصائح ميدانية</b></h4><ul>
+<li>لا تخلط هذا الفلاغ مع فلاغات متضاربة - اقرأ --help أولا</li>
+<li>استخدمه مع -o لحفظ النتائج دائما في عمليات حقيقية</li>
+<li>جرب الأمر على بريد اختبار قبل استهداف قائمة كبيرة لتجنب Rate Limit</li>
+</ul><div class="tip">تذكير: ينتمي لمرحلة RECON - ادمجه مع نفس المرحلة لبناء Chain.</div></div>
 </div>
 </div>
 
-<div class="card recon" data-phase="recon" data-search="-q, --custom-query USER_QUERY استعلام مخصص خارج البريد - Lateral Hunting يسمح بالبحث بمعايير غير البريد: username, password, ip, hash, domain. يفعل ضمنيا loose search عند البحث محليا. يحول الأداة لمحرك بحث تسريبات.">
+<div class="card recon">
 <div class="head" onclick="this.parentElement.classList.toggle('closed')">
-<h2><code>-q, --custom-query USER_QUERY</code> استعلام مخصص خارج البريد - Lateral Hunting</h2>
+<h2><code>-q, --custom-query</code> استعلام مخصص Lateral Hunting</h2>
 <span class="tag r">RECON</span>
 </div>
 <div class="body">
-<div class="box"><h4><b>1. ماذا يفعل؟</b> - التعريف المبسط</h4><div>يسمح بالبحث بمعايير غير البريد: username, password, ip, hash, domain. يفعل ضمنيا loose search عند البحث محليا. يحول الأداة لمحرك بحث تسريبات.</div></div>
-<div class="box"><h4><b>2. لماذا نستعمله؟</b> - الفائدة الميدانية الحقيقية</h4><div>عندما تجد باسورد مسرب، تريد معرفة كل الحسابات التي استخدمت نفس الباسورد. أو عندك IP تريد معرفة من سجل به. هذا الفلاغ يحول h8mail من email hunter إلى breach search engine كامل.</div></div>
-<div class="box"><h4><b>3. كيف يعمل تقنيا؟</b> - ما وراء الكواليس</h4><div>يمرر الكويري إلى كل مصدر: محليا يبحث كـ substring في ملفات التسريب، و عبر APIs مثل Dehashed و Snusbase التي تدعم البحث بالـ hash أو الـ ip. الـ loose يمنع فلترة regex البريد ويجعل البحث فضفاضا.</div></div>
-<div class="box"><h4><b>4. مثال مبتدئ - جاهز للنسخ</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -q P@ssw0rd123</span><br><br><span style="color:#8a9bb8"># الشرح: يبحث عن كل ظهور لكلمة السر هذه في التسريبات المحلية والـ APIs. خطير لفهم انتشار الباسورد.</span></div></div>
-<div class="box"><h4><b>5. مثال احترافي متقدم - Chain</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -q 192.168.1.10 -lb ./breaches -gz ./breaches_gz --hide</span><br><br><span style="color:#8a9bb8"># الشرح: احترافي: تبحث عن IP في تسريبات محلية مضغوطة وغير مضغوطة، مع إخفاء الباسوردات في العرض للـ demo الآمن.</span></div></div>
-<div class="box"><h4><b>6. نصائح ميدانية لتجنب الأخطاء</b></h4><ul><li>استخدمه مع -lb و -gz للحصول على نتائج فورية بدون API keys</li><li>عند البحث عن domain مثل -q target.com سيرجع كل بريد في ذلك الدومين حتى لو لم تمرره بـ -t</li><li>احذر من الكويري العامة مثل 'admin' - ستغرق في النتائج، استخدم كويري محددة</li></ul><div class="tip" style="margin-top:8px">تذكير تكتيكي: هذا الفلاغ ينتمي لمرحلة RECON - ادمجه مع فلاغات نفس المرحلة لبناء سلسلة هجوم متكاملة.</div></div>
+<div class="box"><h4><b>1. ماذا يفعل؟</b></h4><div>يسمح بالبحث بـ username, password, ip, hash, domain. يفعل loose ضمنيا.</div></div>
+<div class="box"><h4><b>2. لماذا نستعمله؟</b> - الفائدة الميدانية</h4><div>عندك باسورد مسرب تريد كل الحسابات بنفس الباسورد. يحول h8mail لمحرك breach search.</div></div>
+<div class="box"><h4><b>3. كيف يعمل تقنيا؟</b></h4><div>يمرر الكويري لكل مصدر: محليا substring، عبر APIs مثل Dehashed و Snusbase.</div></div>
+<div class="box"><h4><b>4. مثال مبتدئ</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -q P@ssw0rd123</span></div></div>
+<div class="box"><h4><b>5. مثال احترافي متقدم - Chain</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -q 192.168.1.10 -lb ./breaches -gz ./gz --hide</span></div></div>
+<div class="box"><h4><b>6. نصائح ميدانية</b></h4><ul>
+<li>لا تخلط هذا الفلاغ مع فلاغات متضاربة - اقرأ --help أولا</li>
+<li>استخدمه مع -o لحفظ النتائج دائما في عمليات حقيقية</li>
+<li>جرب الأمر على بريد اختبار قبل استهداف قائمة كبيرة لتجنب Rate Limit</li>
+</ul><div class="tip">تذكير: ينتمي لمرحلة RECON - ادمجه مع نفس المرحلة لبناء Chain.</div></div>
 </div>
 </div>
 
-<div class="card recon" data-phase="recon" data-search="--loose البحث الفضفاض - كسر قيود الـ Regex يعطل التعرف على نمط البريد الإلكتروني. يستخدم المسافات كفواصل أنماط. يسمح بالبحث بأي نص حتى لو ليس بريدا.">
+<div class="card recon">
 <div class="head" onclick="this.parentElement.classList.toggle('closed')">
-<h2><code>--loose</code> البحث الفضفاض - كسر قيود الـ Regex</h2>
+<h2><code>--loose</code> البحث الفضفاض</h2>
 <span class="tag r">RECON</span>
 </div>
 <div class="body">
-<div class="box"><h4><b>1. ماذا يفعل؟</b> - التعريف المبسط</h4><div>يعطل التعرف على نمط البريد الإلكتروني. يستخدم المسافات كفواصل أنماط. يسمح بالبحث بأي نص حتى لو ليس بريدا.</div></div>
-<div class="box"><h4><b>2. لماذا نستعمله؟</b> - الفائدة الميدانية الحقيقية</h4><div>الوضع الافتراضي يرفض أي شيء ليس بريدا. لكن في التحقيق تحتاج تبحث عن username فقط أو جزء من البريد. هذا الفلاغ يفتح الباب للبحث المرن.</div></div>
-<div class="box"><h4><b>3. كيف يعمل تقنيا؟</b> - ما وراء الكواليس</h4><div>عند تفعيله، يتخطى دالة is_email() ويعتبر كل token هو target. في البحث المحلي، يحول البحث إلى substring search بدل regex match. يزيد الضوضاء لكن يزيد التغطية.</div></div>
-<div class="box"><h4><b>4. مثال مبتدئ - جاهز للنسخ</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -t john.doe --loose</span><br><br><span style="color:#8a9bb8"># الشرح: يبحث عن john.doe حتى لو ليس بريد كامل. مفيد عند عندك usernames من تسريب.</span></div></div>
-<div class="box"><h4><b>5. مثال احترافي متقدم - Chain</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -t list_of_usernames.txt --loose -lb ./combolist.txt -o loose_hunt.csv</span><br><br><span style="color:#8a9bb8"># الشرح: متقدم: يأخذ قائمة usernames، يبحث عنهم في combolist ضخم، ويخرج النتائج - يستخدم لربط usernames بكلمات سر مسربة.</span></div></div>
-<div class="box"><h4><b>6. نصائح ميدانية لتجنب الأخطاء</b></h4><ul><li>يجب أن يسبق أو يلي -t أو -q - وحده لا يفعل شيئا</li><li>مع --loose ستزيد الضوضاء - ادمجه مع -o وفلتر النتائج لاحقا بـ jq</li><li>مثالي عند البحث في تسريبات لا تتبع صيغة email:pass بل user:pass</li></ul><div class="tip" style="margin-top:8px">تذكير تكتيكي: هذا الفلاغ ينتمي لمرحلة RECON - ادمجه مع فلاغات نفس المرحلة لبناء سلسلة هجوم متكاملة.</div></div>
+<div class="box"><h4><b>1. ماذا يفعل؟</b></h4><div>يعطل التعرف على نمط البريد. يستخدم المسافات كفواصل.</div></div>
+<div class="box"><h4><b>2. لماذا نستعمله؟</b> - الفائدة الميدانية</h4><div>الافتراضي يرفض أي شيء ليس بريدا. تحتاج تبحث عن username فقط.</div></div>
+<div class="box"><h4><b>3. كيف يعمل تقنيا؟</b></h4><div>يتخطى is_email() ويعتبر كل token هدف. يحول البحث إلى substring.</div></div>
+<div class="box"><h4><b>4. مثال مبتدئ</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -t john.doe --loose</span></div></div>
+<div class="box"><h4><b>5. مثال احترافي متقدم - Chain</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -t usernames.txt --loose -lb ./combolist.txt -o loose.csv</span></div></div>
+<div class="box"><h4><b>6. نصائح ميدانية</b></h4><ul>
+<li>لا تخلط هذا الفلاغ مع فلاغات متضاربة - اقرأ --help أولا</li>
+<li>استخدمه مع -o لحفظ النتائج دائما في عمليات حقيقية</li>
+<li>جرب الأمر على بريد اختبار قبل استهداف قائمة كبيرة لتجنب Rate Limit</li>
+</ul><div class="tip">تذكير: ينتمي لمرحلة RECON - ادمجه مع نفس المرحلة لبناء Chain.</div></div>
 </div>
 </div>
 
-<div class="card audit" data-phase="audit" data-search="-c, --config CONFIG_FILE [CONFIG_FILE ...] تحميل مفاتيح الـ APIs - ذخيرة الهجوم يحدد ملف أو ملفات الإعداد التي تحتوي مفاتيح API لخدمات Snusbase, WeLeakInfo, Leak-Lookup, HaveIBeenPwned, Emailrep, Dehashed, hunterio. هو مخزن الذخيرة.">
+<div class="card audit">
 <div class="head" onclick="this.parentElement.classList.toggle('closed')">
-<h2><code>-c, --config CONFIG_FILE [CONFIG_FILE ...]</code> تحميل مفاتيح الـ APIs - ذخيرة الهجوم</h2>
+<h2><code>-c, --config</code> تحميل مفاتيح APIs</h2>
 <span class="tag a">AUDIT</span>
 </div>
 <div class="body">
-<div class="box"><h4><b>1. ماذا يفعل؟</b> - التعريف المبسط</h4><div>يحدد ملف أو ملفات الإعداد التي تحتوي مفاتيح API لخدمات Snusbase, WeLeakInfo, Leak-Lookup, HaveIBeenPwned, Emailrep, Dehashed, hunter
+<div class="box"><h4><b>1. ماذا يفعل؟</b></h4><div>يحدد ملف الإعداد الذي يحوي مفاتيح API لـ 7 خدمات.</div></div>
+<div class="box"><h4><b>2. لماذا نستعمله؟</b> - الفائدة الميدانية</h4><div>بدون مفاتيح أنت محدود بـ Scylla المجانية فقط. معه تفتح ترسانة كاملة.</div></div>
+<div class="box"><h4><b>3. كيف يعمل تقنيا؟</b></h4><div>يقرأ INI file، يبحث عن أقسام [haveibeenpwned] إلخ، يحمل المفاتيح إلى dict.</div></div>
+<div class="box"><h4><b>4. مثال مبتدئ</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -t victim@corp.com -c myconfig.ini</span></div></div>
+<div class="box"><h4><b>5. مثال احترافي متقدم - Chain</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -t bulk.txt -c config1.ini config2.ini -o full.csv -j full.json</span></div></div>
+<div class="box"><h4><b>6. نصائح ميدانية</b></h4><ul>
+<li>لا تخلط هذا الفلاغ مع فلاغات متضاربة - اقرأ --help أولا</li>
+<li>استخدمه مع -o لحفظ النتائج دائما في عمليات حقيقية</li>
+<li>جرب الأمر على بريد اختبار قبل استهداف قائمة كبيرة لتجنب Rate Limit</li>
+</ul><div class="tip">تذكير: ينتمي لمرحلة AUDIT - ادمجه مع نفس المرحلة لبناء Chain.</div></div>
+</div>
+</div>
+
+<div class="card exploit">
+<div class="head" onclick="this.parentElement.classList.toggle('closed')">
+<h2><code>-o, --output</code> حفظ CSV - سجل المعركة</h2>
+<span class="tag e">EXPLOIT</span>
+</div>
+<div class="body">
+<div class="box"><h4><b>1. ماذا يفعل؟</b></h4><div>يحدد ملف لحفظ النتائج بصيغة CSV المنظمة.</div></div>
+<div class="box"><h4><b>2. لماذا نستعمله؟</b> - الفائدة الميدانية</h4><div>الطرفية تضيع. تحتاج سجل قابل للاستيراد إلى Excel أو Maltego.</div></div>
+<div class="box"><h4><b>3. كيف يعمل تقنيا؟</b></h4><div>يفتح ملف للكتابة، يكتب header: target, breach, email, password.</div></div>
+<div class="box"><h4><b>4. مثال مبتدئ</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -t admin@site.com -o pwned.csv</span></div></div>
+<div class="box"><h4><b>5. مثال احترافي متقدم - Chain</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -t list.txt -lb ./leaks -gz ./leaks -o all.csv -j all.json --hide</span></div></div>
+<div class="box"><h4><b>6. نصائح ميدانية</b></h4><ul>
+<li>لا تخلط هذا الفلاغ مع فلاغات متضاربة - اقرأ --help أولا</li>
+<li>استخدمه مع -o لحفظ النتائج دائما في عمليات حقيقية</li>
+<li>جرب الأمر على بريد اختبار قبل استهداف قائمة كبيرة لتجنب Rate Limit</li>
+</ul><div class="tip">تذكير: ينتمي لمرحلة EXPLOIT - ادمجه مع نفس المرحلة لبناء Chain.</div></div>
+</div>
+</div>
+
+<div class="card exploit">
+<div class="head" onclick="this.parentElement.classList.toggle('closed')">
+<h2><code>-j, --json</code> حفظ JSON للأتمتة</h2>
+<span class="tag e">EXPLOIT</span>
+</div>
+<div class="body">
+<div class="box"><h4><b>1. ماذا يفعل؟</b></h4><div>يحفظ النتائج بصيغة JSON مفصلة للمعالجة البرمجية.</div></div>
+<div class="box"><h4><b>2. لماذا نستعمله؟</b> - الفائدة الميدانية</h4><div>CSV للبشر، JSON للآلات. تريد ربط h8mail مع سكربت بايثون يختبر كلمات السر.</div></div>
+<div class="box"><h4><b>3. كيف يعمل تقنيا؟</b></h4><div>يبني list of dicts كل dict يحوي target, sources, data. ثم json.dump.</div></div>
+<div class="box"><h4><b>4. مثال مبتدئ</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -t ceo@company.com -j ceo.json</span></div></div>
+<div class="box"><h4><b>5. مثال احترافي متقدم - Chain</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -t staff.txt -c config.ini -j staff.json -o staff.csv --power-chase --chase 5</span></div></div>
+<div class="box"><h4><b>6. نصائح ميدانية</b></h4><ul>
+<li>لا تخلط هذا الفلاغ مع فلاغات متضاربة - اقرأ --help أولا</li>
+<li>استخدمه مع -o لحفظ النتائج دائما في عمليات حقيقية</li>
+<li>جرب الأمر على بريد اختبار قبل استهداف قائمة كبيرة لتجنب Rate Limit</li>
+</ul><div class="tip">تذكير: ينتمي لمرحلة EXPLOIT - ادمجه مع نفس المرحلة لبناء Chain.</div></div>
+</div>
+</div>
+
+<div class="card audit">
+<div class="head" onclick="this.parentElement.classList.toggle('closed')">
+<h2><code>-bc, --breachcomp</code> تكامل BreachCompilation</h2>
+<span class="tag a">AUDIT</span>
+</div>
+<div class="body">
+<div class="box"><h4><b>1. ماذا يفعل؟</b></h4><div>يحدد مسار مجلد تورنت BreachCompilation (1.4B حساب) ويستخدم query.sh.</div></div>
+<div class="box"><h4><b>2. لماذا نستعمله؟</b> - الفائدة الميدانية</h4><div>أكبر تجميع تسريبات مجاني. إذا عندك التورنت محليا يعطيك قوة خارقة بدون APIs.</div></div>
+<div class="box"><h4><b>3. كيف يعمل تقنيا؟</b></h4><div>يتحقق من وجود query.sh في المسار، ثم ينفذ bash query.sh TARGET.</div></div>
+<div class="box"><h4><b>4. مثال مبتدئ</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -t test@test.com -bc /opt/breachcompilation</span></div></div>
+<div class="box"><h4><b>5. مثال احترافي متقدم - Chain</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -t targets.txt -bc /data/bc -lb ./other_leaks --single-file -o bc.csv</span></div></div>
+<div class="box"><h4><b>6. نصائح ميدانية</b></h4><ul>
+<li>لا تخلط هذا الفلاغ مع فلاغات متضاربة - اقرأ --help أولا</li>
+<li>استخدمه مع -o لحفظ النتائج دائما في عمليات حقيقية</li>
+<li>جرب الأمر على بريد اختبار قبل استهداف قائمة كبيرة لتجنب Rate Limit</li>
+</ul><div class="tip">تذكير: ينتمي لمرحلة AUDIT - ادمجه مع نفس المرحلة لبناء Chain.</div></div>
+</div>
+</div>
+
+<div class="card audit">
+<div class="head" onclick="this.parentElement.classList.toggle('closed')">
+<h2><code>-sk, --skip-defaults</code> وضع التخفي المحلي</h2>
+<span class="tag a">AUDIT</span>
+</div>
+<div class="body">
+<div class="box"><h4><b>1. ماذا يفعل؟</b></h4><div>يتخطى فحص Scylla و HunterIO الافتراضي. مثالي للفحص المحلي فقط.</div></div>
+<div class="box"><h4><b>2. لماذا نستعمله؟</b> - الفائدة الميدانية</h4><div>عندما تعمل offline أو لا تريد أثر شبكي. يسرع البحث المحلي 70%.</div></div>
+<div class="box"><h4><b>3. كيف يعمل تقنيا؟</b></h4><div>يضع skip_scylla=True و skip_hunter=True. الحلقة تتخطى هذين المصدرين.</div></div>
+<div class="box"><h4><b>4. مثال مبتدئ</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -t user@local.test -lb ./leak.txt -sk</span></div></div>
+<div class="box"><h4><b>5. مثال احترافي متقدم - Chain</b></h4><div class="codewrap"><button class="btn" onclick="copyTxt(this)">نسخ</button><span class="cmdtxt">h8mail -t biglist.txt -lb /mnt/leaks -gz /mnt/gz -sk -sf -o local.csv</span></div></div>
+<div class="box"><h4><b>6. نصائح ميدانية</b></h4><ul>
+<li>لا تخلط هذا الفلاغ مع فلاغات متضاربة - اقرأ --help أولا</li>
+<li>استخدمه مع -o لحفظ النتائج دائما في عمليات حقيقية</li>
+<li>جرب الأمر على بريد اختبار قبل استهداف قائمة كبيرة لتجنب Rate Limit</li>
+</ul><div class="tip">تذكير: ينتمي لمرحلة AUDIT - ادمجه مع نفس المرحلة لبناء Chain.</div></div>
+</div>
+</div>
+
+<div class="card audit">
+<div class="head" onclick="this.parentElement.classList.toggle('closed')">
+<h2><code>-k, --apikey</code> تمرير المفاتيح من CLI</h2>
+<span class="tag a">AUDIT</span>
+</div>
+<div class="body">
+<div class="box"><h4><b>1. ماذا يفعل؟</b></h4><div>يسمح بتمرير مفاتيح API مباشرة بصيغة K=V,K=V دون ملف config.</div></div>
+<div class="box"><h4><b>2. لماذا نستعمله؟</b> - الفائدة الميدانية</h4><div>لسرعة تكتيكية - لا تريد إنشاء ملف، تريد لصق مفتاح والانطلاق.</div></div>
+<div class="box"><h4><b>3. كيف يعمل تقنيا؟</b></h4><div>يحلل النص: يقسم على فاصلة ثم كل عنصر على =. يبني dict.</div></div>
+<div cla
